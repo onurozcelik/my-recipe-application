@@ -18,8 +18,11 @@ public class Recipe {
     private String url;
     private String directions;
 
-    // TODO add
-    // private Difficulty difficulty;
+    /* Stores enums string value in db if value is EnumType.STRING
+       Stores enums ordinal (integer) value in fb if value is EnumType.ORDINAL
+     */
+    @Enumerated(value = EnumType.STRING)
+    private Difficulty difficulty;
 
     @Lob
     private Byte[] image;
