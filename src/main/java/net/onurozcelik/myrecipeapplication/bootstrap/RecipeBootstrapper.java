@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class RecipeBootstraper implements ApplicationListener<ContextRefreshedEvent> {
+public class RecipeBootstrapper implements ApplicationListener<ContextRefreshedEvent> {
 
     private final UnitOfMeasureRepository unitOfMeasureRepository;
     private final CategoryRepository categoryRepository;
@@ -22,7 +22,7 @@ public class RecipeBootstraper implements ApplicationListener<ContextRefreshedEv
 
     private final List<Recipe> recipes = new ArrayList<>();
 
-    public RecipeBootstraper(UnitOfMeasureRepository unitOfMeasureRepository, CategoryRepository categoryRepository, RecipeRepository recipeRepository) {
+    public RecipeBootstrapper(UnitOfMeasureRepository unitOfMeasureRepository, CategoryRepository categoryRepository, RecipeRepository recipeRepository) {
         this.unitOfMeasureRepository = unitOfMeasureRepository;
         this.categoryRepository = categoryRepository;
         this.recipeRepository = recipeRepository;
@@ -102,15 +102,14 @@ public class RecipeBootstraper implements ApplicationListener<ContextRefreshedEv
                 "Praesent mauris erat, vulputate et eros id, sagittis suscipit augue. Donec eu tincidunt dui, a accumsan lectus. Etiam quis tellus arcu. Nullam eu dolor lorem. Nunc fermentum, orci ut ullamcorper egestas, tortor purus mattis quam, ac sollicitudin erat arcu vel turpis. " +
                 "Sed dapibus maximus rutrum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer quis cursus nibh. Nam sed dignissim dolor, vestibulum laoreet tortor. In tristique orci libero, ac consequat est lobortis a. " +
                 "Sed sem ligula, lacinia id orci at, lobortis sollicitudin tortor. Proin posuere dui nec magna mattis luctus. Cras eu turpis tempus, iaculis eros at, aliquet nisi.");
-        notes1.setRecipe(recipe1);
 
         recipe1.setNotes(notes1);
 
-        recipe1.getIngredients().add(new Ingredient("Ingredient 1", new BigDecimal(2), cupUom, recipe1));
-        recipe1.getIngredients().add(new Ingredient("Ingredient 2", new BigDecimal(3), teaspoonUom, recipe1));
-        recipe1.getIngredients().add(new Ingredient("Ingredient 3", new BigDecimal(4), tablespoonUom, recipe1));
-        recipe1.getIngredients().add(new Ingredient("Ingredient 4", new BigDecimal(5), ounceUom, recipe1));
-        recipe1.getIngredients().add(new Ingredient("Ingredient 1", new BigDecimal(1), pinchUom, recipe1));
+        recipe1.addIngredient(new Ingredient("Ingredient 1", new BigDecimal(2), cupUom));
+        recipe1.addIngredient(new Ingredient("Ingredient 2", new BigDecimal(3), teaspoonUom));
+        recipe1.addIngredient(new Ingredient("Ingredient 3", new BigDecimal(4), tablespoonUom));
+        recipe1.addIngredient(new Ingredient("Ingredient 4", new BigDecimal(5), ounceUom));
+        recipe1.addIngredient(new Ingredient("Ingredient 5", new BigDecimal(1), pinchUom));
 
         recipes.add(recipe1);
 
