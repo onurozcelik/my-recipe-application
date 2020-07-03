@@ -1,5 +1,6 @@
 package net.onurozcelik.myrecipeapplication.bootstrap;
 
+import lombok.extern.slf4j.Slf4j;
 import net.onurozcelik.myrecipeapplication.domain.*;
 import net.onurozcelik.myrecipeapplication.repositories.CategoryRepository;
 import net.onurozcelik.myrecipeapplication.repositories.RecipeRepository;
@@ -7,12 +8,14 @@ import net.onurozcelik.myrecipeapplication.repositories.UnitOfMeasureRepository;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Component
 public class RecipeBootstrapper implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -112,11 +115,12 @@ public class RecipeBootstrapper implements ApplicationListener<ContextRefreshedE
         recipe1.addIngredient(new Ingredient("Ingredient 5", new BigDecimal(1), pinchUom));
 
         recipes.add(recipe1);
-
+        log.debug("Prepared some recipes!!!");
         return recipes;
     }
 
     @Override
+    @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         recipeRepository.saveAll(getRecipes());
     }

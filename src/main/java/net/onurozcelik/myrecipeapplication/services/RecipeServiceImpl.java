@@ -1,14 +1,14 @@
 package net.onurozcelik.myrecipeapplication.services;
 
+import lombok.extern.slf4j.Slf4j;
 import net.onurozcelik.myrecipeapplication.domain.Recipe;
 import net.onurozcelik.myrecipeapplication.repositories.RecipeRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
+@Slf4j
 @Service
 public class RecipeServiceImpl implements RecipeService {
     private final RecipeRepository recipeRepository;
@@ -18,6 +18,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     public Set<Recipe> getRecipes() {
+        log.debug("Getting recipes");
         Set<Recipe> recipes = new HashSet<>();
         recipeRepository.findAll().forEach(recipes::add);
         return recipes;
