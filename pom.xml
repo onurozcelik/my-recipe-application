@@ -56,7 +56,9 @@
 					<groupId>org.junit.vintage</groupId>
 					<artifactId>junit-vintage-engine</artifactId>
 				</exclusion>
-			</exclusions>-->
+			</exclusions>
+			Fix for commit problem.
+			-->
 		</dependency>
         <dependency>
             <groupId>junit</groupId>
