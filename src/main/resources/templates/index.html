@@ -29,6 +29,7 @@
                                 <th>Prep Time</th>
                                 <th>View</th>
                                 <th>Update</th>
+                                <th>Delete</th>
                             </tr>
                             </thead>
                             <tr th:remove="all">
@@ -37,6 +38,7 @@
                                 <td th:text="${recipe.prepTime}">5</td>
                                 <td><a href="#">View</a></td>
                                 <td><a href="#">Update</a></td>
+                                <td><a href="#">Delete</a></td>
                             </tr>
                             <tr th:remove="all">
                                 <td th:text="${recipe.description}">Efsane tarif 2</td>
@@ -44,6 +46,7 @@
                                 <td th:text="${recipe.prepTime}">7</td>
                                 <td><a href="#">View</a></td>
                                 <td><a href="#">Update</a></td>
+                                <td><a href="#">Delete</a></td>
                             </tr>
                             <tr th:each="recipe : ${recipes}">
                                 <td th:text="${recipe.description}">Efsane tarif 3</td>
@@ -51,6 +54,7 @@
                                 <td th:text="${recipe.prepTime}">6</td>
                                 <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/show'}">View</a></td>
                                 <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/update'}">Update</a></td>
+                                <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/delete'}">Delete</a></td>
                             </tr>
                         </table>
                     </div>
