@@ -1,5 +1,6 @@
 package net.onurozcelik.myrecipeapplication.services;
 
+import net.onurozcelik.myrecipeapplication.commands.RecipeCommand;
 import net.onurozcelik.myrecipeapplication.converters.RecipeCommandToRecipe;
 import net.onurozcelik.myrecipeapplication.converters.RecipeToRecipeCommand;
 import net.onurozcelik.myrecipeapplication.domain.Recipe;
@@ -55,4 +56,21 @@ public class RecipeServiceImplTest {
         verify(recipeRepository, times(1)).findById(anyLong());
         verify(recipeRepository, never()).findAll();
     }
+
+    @Test
+    public void findCommandById() {
+        Recipe recipe = new Recipe();
+        recipe.setId(Long.valueOf(1L));
+        Optional<Recipe> recipeOptional = Optional.of(recipe);
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+        RecipeCommand command = new RecipeCommand();
+        command.setId(Long.valueOf(1L));
+        when(recipeToRecipeCommand.convert(any())).thenReturn(command);
+        RecipeCommand commandById = recipeService.findCommandById(1L);
+        assertNotNull("Null command returned", commandById);
+        verify(recipeRepository, times(1)).findById(anyLong());
+        verify(recipeRepository, never()).findAll();
+
+    }
+
 }
