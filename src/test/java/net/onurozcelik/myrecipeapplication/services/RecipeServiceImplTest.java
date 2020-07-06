@@ -1,11 +1,12 @@
 package net.onurozcelik.myrecipeapplication.services;
 
+import net.onurozcelik.myrecipeapplication.converters.RecipeCommandToRecipe;
+import net.onurozcelik.myrecipeapplication.converters.RecipeToRecipeCommand;
 import net.onurozcelik.myrecipeapplication.domain.Recipe;
 import net.onurozcelik.myrecipeapplication.repositories.RecipeRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.HashSet;
@@ -18,12 +19,18 @@ public class RecipeServiceImplTest {
     private RecipeServiceImpl recipeService;
 
     @Mock
+    private RecipeToRecipeCommand recipeToRecipeCommand;
+
+    @Mock
+    private RecipeCommandToRecipe recipeCommandToRecipe;
+
+    @Mock
     private RecipeRepository recipeRepository;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        recipeService = new RecipeServiceImpl(recipeRepository, recipeToRecipeCommand, recipeCommandToRecipe);
     }
 
     @Test
