@@ -1,10 +1,12 @@
 package net.onurozcelik.myrecipeapplication.services;
 
 import net.onurozcelik.myrecipeapplication.commands.IngredientCommand;
+import net.onurozcelik.myrecipeapplication.converters.IngredientCommandToIngredient;
 import net.onurozcelik.myrecipeapplication.converters.IngredientToIngredientCommand;
 import net.onurozcelik.myrecipeapplication.domain.Ingredient;
 import net.onurozcelik.myrecipeapplication.domain.Recipe;
 import net.onurozcelik.myrecipeapplication.repositories.RecipeRepository;
+import net.onurozcelik.myrecipeapplication.repositories.UnitOfMeasureRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -27,10 +29,16 @@ public class IngredientServiceImplTest {
     @Mock
     RecipeRepository recipeRepository;
 
+    @Mock
+    UnitOfMeasureRepository unitOfMeasureRepository;
+
+    @Mock
+    IngredientCommandToIngredient ingredientCommandToIngredient;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        ingredientService = new IngredientServiceImpl(recipeRepository, ingredientToIngredientCommand);
+        ingredientService = new IngredientServiceImpl(recipeRepository, ingredientToIngredientCommand, unitOfMeasureRepository, ingredientCommandToIngredient);
     }
 
     @Test
