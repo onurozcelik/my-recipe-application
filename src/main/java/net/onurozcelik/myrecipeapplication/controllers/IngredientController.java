@@ -3,6 +3,7 @@ package net.onurozcelik.myrecipeapplication.controllers;
 import lombok.extern.slf4j.Slf4j;
 import net.onurozcelik.myrecipeapplication.commands.IngredientCommand;
 import net.onurozcelik.myrecipeapplication.commands.RecipeCommand;
+import net.onurozcelik.myrecipeapplication.commands.UnitOfMeasureCommand;
 import net.onurozcelik.myrecipeapplication.services.IngredientService;
 import net.onurozcelik.myrecipeapplication.services.RecipeService;
 import net.onurozcelik.myrecipeapplication.services.UnitOfMeasureService;
@@ -56,5 +57,15 @@ public class IngredientController {
         log.debug("saved recipe id:" + savedCommand.getRecipeId());
         log.debug("saved ingredient id:" + savedCommand.getId());
         return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show";
+    }
+
+    @RequestMapping("recipe/{recipeId}/ingredient/new")
+    public String newIngredient(@PathVariable String recipeId, Model model) {
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setRecipeId(Long.valueOf(recipeId));
+        ingredientCommand.setUnitOfMeasure(new UnitOfMeasureCommand());
+        model.addAttribute("ingredient", ingredientCommand);
+        model.addAttribute("uoms", unitOfMeasureService.findAllUoMs());
+        return "recipe/ingredient/ingredientform";
     }
 }

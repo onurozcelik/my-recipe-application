@@ -113,4 +113,13 @@ public class IngredientControllerTest {
                 .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
                 .andExpect(MockMvcResultMatchers.view().name("redirect:/recipe/2/ingredient/3/show"));
     }
+
+    @Test
+    public void newIngredient() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/recipe/1/ingredient/new"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("recipe/ingredient/ingredientform"))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("uoms"))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("ingredient"));
+    }
 }
